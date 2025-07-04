@@ -37,6 +37,10 @@ RUN pnpm run build
 # Remove development dependencies
 RUN pnpm prune --prod
 
+# Build the UI
+RUN pnpm run ui-install
+RUN pnpm run ui:build
+
 
 # Final stage for app image
 FROM base
@@ -79,5 +83,5 @@ COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3333
-CMD ["/bin/bash", "-c", "/azure-login.sh && pnpm run start"]
+CMD ["/bin/bash", "-c", "pnpm run start & /azure-login.sh && wait"]
 # CMD [ "pnpm", "run", "start" ]

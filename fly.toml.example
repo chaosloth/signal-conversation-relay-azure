@@ -8,13 +8,37 @@ primary_region = 'syd'
 
 [build]
 
-[http_service]
+[processes]
+convorelay = '/bin/bash -c /azure-login.sh'
+demoui = 'pnpm run ui'
+
+[[services]]
+  processes = ['convorelay']
   internal_port = 3333
-  force_https = true
-  auto_stop_machines = 'stop'
+  auto_stop_machines = 'suspend'
   auto_start_machines = true
-  min_machines_running = 0
-  processes = ['app']
+  min_machines_running = 1
+  [[services.ports]]
+      handlers = ["http"]
+      port = 80
+      force_https = true
+  [[services.ports]]
+      handlers = ["tls", "http"]
+      port = 443
+
+[[services]]
+  processes = ['demoui']
+  internal_port = 3000
+  auto_stop_machines = 'suspend'
+  auto_start_machines = true
+  min_machines_running = 1
+  [[services.ports]]
+      handlers = ["http"]
+      port = 8080
+      force_https = true
+  [[services.ports]]
+      handlers = ["tls", "http"]
+      port = 8081
 
 [env]
   PRESENTATION_MODE = 'demo'

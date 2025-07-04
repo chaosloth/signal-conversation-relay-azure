@@ -11,3 +11,6 @@ az login --service-principal \
 az account set --subscription "$AZURE_SUBSCRIPTION_ID"
 
 echo "Azure login successful"
+
+echo "Starting Server..."
+pnpm run start
