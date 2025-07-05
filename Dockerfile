@@ -83,5 +83,7 @@ COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3333
+
+# Note: fly.toml [processes] groups will be used instead of this CMD (this is only if you're using Docker not on Fly.io)
 CMD ["/bin/bash", "-c", "pnpm run start & /azure-login.sh && wait"]
 # CMD [ "pnpm", "run", "start" ]
