@@ -3,9 +3,7 @@
   Conversation Relay + Azure Foundry
 </h1>
 
-<p align="center">
-  <img src="docs/demo.gif" alt="Conversation Relay demo" />
-</p>
+https://github.com/user-attachments/assets/3210ba0f-1471-46b8-b3c4-978a92d48f7f
 
 # Twilio Setup
 
@@ -60,15 +58,17 @@ Login to Azure AI Foundry
 4. Add Agent Action. Copy `<proj>/server/agents/underwriter-agent/tool-manifest.json` into schema of as an `OpenAPI 3.0 specified tool` Action and name it `UnderwriterBrainTool`. Note: Replace `{HOSTNAME}` with your ngrok hostname
 
 ## Azure CLI (Local Development on OSX)
-Ensure Azure CLI is installed 
+
+Ensure Azure CLI is installed
 
 OSX
+
 ```sh
 brew update && brew install azure-cli
 ```
 
-
 ## Azure - Service User
+
 This will be used in the Fly.io deployment (or other hosting service)
 The steps below walks you through creating a service user (Service Principal) in Azure and collecting the necessary credentials for automation, scripting, or integration purposes.
 
@@ -79,11 +79,12 @@ The steps below walks you through creating a service user (Service Principal) in
 3. Click **+ New registration**
 4. Fill in the form:
    - **Name**: `my-service-user`
-   - **Supported account types**: *Accounts in this organizational directory only (Default)*
-   - **Redirect URI**: *(Optional)* Leave blank unless needed
+   - **Supported account types**: _Accounts in this organizational directory only (Default)_
+   - **Redirect URI**: _(Optional)_ Leave blank unless needed
 5. Click **Register**
 
 📌 **Save these values from the Overview page:**
+
 - `CLIENT_ID` = **Application (client) ID**
 - `TENANT_ID` = **Directory (tenant) ID**
 
@@ -96,7 +97,8 @@ The steps below walks you through creating a service user (Service Principal) in
 5. **Copy the generated secret value immediately**
 
 📌 Save this value:
-- `CLIENT_SECRET` = *The generated secret value*
+
+- `CLIENT_SECRET` = _The generated secret value_
 
 > ⚠️ You will not be able to retrieve the secret again after leaving the page.
 
@@ -105,7 +107,7 @@ The steps below walks you through creating a service user (Service Principal) in
 1. Go to **Subscriptions**
 2. Select your target **Subscription**
 3. Click **Access control (IAM)** > **+ Add > Add role assignment**
-4. In the **Role** tab, select a roles  `Azure AI User` and `Cognitive Services Contributor`
+4. In the **Role** tab, select a roles `Azure AI User` and `Cognitive Services Contributor`
 5. In the **Members** tab:
    - Click **+ Select members**
    - Search for the registered app by name
@@ -118,15 +120,17 @@ The steps below walks you through creating a service user (Service Principal) in
 3. Copy the **Subscription ID** from the overview pane
 
 📌 Save this value:
-- `SUBSCRIPTION_ID` = *The Subscription's GUID*
 
+- `SUBSCRIPTION_ID` = _The Subscription's GUID_
 
 ## Deploying to Fly.io
+
 1. `fly launch` to launch a new app with Fly
 2. copy all the `.env` configuration to respective `[env]` variables in `fly.toml`
 3. copy secrets to `.env.flysecrets`
 4. import the secrets using `fly secrets import < ./.env.flysecrets`
 
 # Populating Demo Data
+
 Once the application has been deployed (or before running locally) ensure that the Twilio Sync objects are populated by running the script:
 `pnpm run data:populate`
