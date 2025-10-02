@@ -5,6 +5,36 @@
 
 https://github.com/user-attachments/assets/3210ba0f-1471-46b8-b3c4-978a92d48f7f
 
+# Demo Overview
+
+This demo showcases a multi-agent, voice-based AI system using Twilio ConversationRelay, Azure OpenAI, Azure AI Search, and Azure Foundry. It implements the **Talker-Reasoner architecture** ([paper](https://arxiv.org/abs/2410.08328v1)), a pattern for building agentic voice systems.
+
+- **Talker Agent**
+
+  - Handles real-time voice interaction with the user
+  - Focused on fluency, latency, and dialogue continuity
+  - Delegates complex tasks to background processes or back-office agents
+
+- **Subconscious Background Processes (Reasoners)**
+
+  - Run in parallel without interrupting the user experience
+  - Examples in this demo:
+    - **Vector Memory:** Long-term memory retrieval via Azure AI Search (semantic vector index)
+    - **Summarizer:** Monitors user sentiment and topics using lightweight LLM logic
+
+- **Back-Office Agents**
+  - Additional autonomous agents the Talker can query when needed
+  - Built using Azure Foundry
+  - Handle domain-specific reasoning and slower, computation-heavy tasks
+  - Support a modular architecture without burdening the main conversational loop
+
+### 🖥️ Dual UI
+
+The demo includes a split-screen view of:
+
+- **Frontend UI:** The user-facing voice interface powered by Twilio
+- **Backend View:** Real-time agent orchestration, including background reasoning, memory queries, and inter-agent messaging
+
 # Twilio Setup
 
 1. Create API key and token and set `.env` file params `TWILIO_API_KEY` and `TWILIO_API_SECRET` respectively
